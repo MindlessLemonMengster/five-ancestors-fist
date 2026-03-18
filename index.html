@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Homecoming</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=IM+Fell+English:ital@0;1&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@200..900&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --ink:#1a1208;
+                --gold:#d4a843;
+                --amber:#c9a96e;
+                --amber-muted:#8b6e3a;
+                --border:#5a3e1b;
+                --vintage-green:#AFAF5E;
+                --yellow:#FFD900;
+                --sand:#ffeac7;
+                --yellow-orange:#FF9500;
+                --old-brick:#C9591C;
+                --orange:#FF5900;
+                --red-brick:#A8300B;
+                --red:#FF3C00;
+                --secret-green:#0C574E;
+                --jade:#158A7C;
+                --dark-blue:#203171;
+                --klein-blue:#3A5FCD;
+            }
+            body {
+                font-family: 'IM Fell English', 'Ma Shan Zheng', serif;
+                background-color: var(--sand);
+                color: var(--dark-blue);
+                margin: 0;
+                padding: 0;
+            }
+            h1 {
+                font-family: 'Cormorant Garamond', serif;
+                color: var(--red-brick);
+            }
+            .label {
+                font-size: 0.75rem;
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                color: var(--old-brick);
+                margin-bottom: 3rem;
+            }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            #hero {
+                text-align: center;
+                padding: 3rem 2rem 2rem;
+                border-bottom: 1px solid var(--vintage-green);
+            }
+            #map {
+                position: relative;
+                width: 507px;
+                height: 648px;
+                margin: 0 auto;
+                flex-shrink: 0;
+            }
+            #map-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0.15;
+                filter: invert(1);
+            }
+            .ancestor-pin {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                cursor: pointer;
+                transition: all 0.1s ease;
+            }
+            #taizu  { top: 59%; left: 30%; }
+            #luohan { top: 38%; left: 38%; }
+            #monkey { top: 50%; left: 52%; }
+            #crane  { top: 15%; left: 45%; }
+            #dazun  { top: 30%; left: 70%; }
+            .ancestor-pin img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                display: block;
+                border: 2px solid var(--dark-blue);
+            }
+            .pin-chinese {
+                font-family: 'Noto Serif SC', serif;
+                font-size: 1.5rem;
+                color: var(--red-brick);
+            }
+            .pin-name {
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--amber-muted);
+                margin-top: 0;
+            }
+            .ancestor-pin:hover {
+                transform: translate(2px, 2px);
+                box-shadow: 1px 1px 0px var(--dark-blue);
+            }
+            #ancestor-info {
+                padding: 1.5rem;
+                border-left: 3px solid var(--vintage-green);
+                min-height: 80px;
+            }
+            #ancestor-info .label {
+                margin-bottom: 0.5rem;
+            }
+            .info-default {
+                color: var(--amber-muted);
+                font-style: italic;
+            }
+            #map-layout {
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+                align-items: flex-end;
+            }
+            #text-panel {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-self: flex-start;
+            }
+            @media (max-width: 600px) {
+                #map-layout {flex-direction: column;}
+                #map {
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 128%;
+                }
+            }
+            .cta-group {
+                display: flex;
+                gap: 1rem;
+                margin-top: 2rem;
+                justify-content: center;
+            }
+            .btn {
+                font-family: 'IM Fell English', serif;
+                font-size: 0.9rem;
+                letter-spacing: 0.15em;
+                text-decoration: none;
+                padding: 0.7rem 2rem;
+                border-radius: 2px;
+                cursor: pointer;
+                display: inline-block;
+                white-space: nowrap;
+                transition: all 0.3s ease;
+            }
+            .btn-primary {
+                background: var(--vintage-green);
+                color: var(--sand);
+                box-shadow: 3px 3px 0px var(--secret-green);
+            }
+            .btn-primary:hover {
+                background: var(--amber-muted);
+                box-shadow: 1px 1px 0px var(--secret-green);
+                transform: translate(2px, 2px);
+            }
+            .btn-secondary {
+                background: var(--amber-muted);
+                color: var(--sand);
+                box-shadow: 3px 3px 0px var(--secret-green);
+            }
+            .btn-secondary:hover {
+                background: var(--vintage-green);
+                box-shadow: 1px 1px 0px var(--secret-green);
+                transform: translate(2px, 2px);
+            }
+        </style>
+    </head>
+    <body>
+        <section id="hero">
+            <h1>Five Ancestors Fist</h1>
+            <p class="label">五祖拳 · Quest for Truth</p>
+        </section>
+        <div class="container">
+            <blockquote>
+                You stand on the sea-crossing Luoyang Bridge in Southern China with a thousand-year history. Below, the waves that once carried diasporic merchant ships and Buddhist mysteries now carry your quest of a kungfu legend. Five paths diverge from here — five ancestors await in the ancient city.
+            </blockquote>
+            <section id="map-section">
+                <div id="map-layout">
+                    <div id="map">
+                        <img id="map-bg" src="images/map.png" alt="Quanzhou map" />
+                        <div class="ancestor-pin" id="taizu">
+                            <img src="images/taizu.jpg" alt="Taizu" />
+                            <span class="pin-chinese">太祖</span>
+                            <span class="pin-name">Taizu</span>
+                        </div>
+                        <div class="ancestor-pin" id="luohan">
+                            <img src="images/luohan.jpg" alt="Luohan" />
+                            <span class="pin-chinese">罗汉</span>
+                            <span class="pin-name">Luohan</span>
+                        </div>
+                        <div class="ancestor-pin" id="monkey">
+                            <img src="images/monkey.jpg" alt="Monkey" />
+                            <span class="pin-chinese">猴拳</span>
+                            <span class="pin-name">Monkey</span>
+                        </div>
+                        <div class="ancestor-pin" id="crane">
+                            <img src="images/crane.jpg" alt="White Crane" />
+                            <span class="pin-chinese">白鹤</span>
+                            <span class="pin-name">White Crane</span>
+                        </div>
+                        <div class="ancestor-pin" id="dazun">
+                            <img src="images/bodhidharma.jpg" alt="Da Zun" />
+                            <span class="pin-chinese">达尊</span>
+                            <span class="pin-name">Da Zun</span>
+                        </div>
+                    </div>
+                    <div id="text-panel">
+                        <p class="label">Choose your path · 泉州</p>
+                        <div id="ancestor-info">
+                            <p class="info-default">Select an ancestor to begin.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="cta-group">
+                <a href="journey.html" class="btn btn-primary">Begin your journey</a>
+                <a href="gallery.html" class="btn btn-secondary">Discover the legacy</a>
+            </div>
+        </div>
+        <script>
+            const ancestors = {
+                taizu:  { name: "太祖 · Taizu",      principle: "Structure & Rooted Power",        desc: "The Emperor never wavered. Like stone pillars, you learn to root yourself so deeply that nothing can move you." },
+                luohan: { name: "羅漢 · Luohan",     principle: "Internal Power & Spirit",         desc: "True strength comes not from muscle, but from spirit unified with form." },
+                monkey: { name: "猴拳 · Monkey",     principle: "Agility & Deception",             desc: "The Monkey survives not by confronting the Tiger, but by outsmarting it." },
+                crane:  { name: "白鶴 · White Crane", principle: "Precision & Graceful Power",      desc: "Strike once. Make it count. Then return to stillness." },
+                dazun:  { name: "達尊 · Da Zun",     principle: "Integration & Enlightenment",     desc: "The five ancestors were never separate — fingers on the same hand." }
+            };
+
+            const pins = document.querySelectorAll('.ancestor-pin');
+            const infoBox = document.getElementById('ancestor-info');
+
+            pins.forEach(pin => {
+                pin.addEventListener('click', () => {
+                const id = pin.id;
+                const a = ancestors[id];
+                infoBox.innerHTML = `
+                    <p class="label">${a.principle}</p>
+                    <h3>${a.name}</h3>
+                    <p>${a.desc}</p>
+                `;
+            });
+        });
+        </script>
+    </body>
+</html>
